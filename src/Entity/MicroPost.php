@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MicropostRepository")
  */
-class Micropost
+class MicroPost
 {
     /**
      * @ORM\Id()
@@ -16,8 +16,13 @@ class Micropost
      */
     private $id;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="string", length=280)
+     */
+    private $text;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $time;
 }
