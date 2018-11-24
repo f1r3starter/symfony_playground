@@ -17,11 +17,6 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      */
@@ -41,6 +36,45 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=50)
      */
     private $fullName;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param mixed $fullName
+     */
+    public function setFullName($fullName): void
+    {
+        $this->fullName = $fullName;
+    }
+
+
 
     /**
      * Returns the roles granted to the user.
@@ -122,6 +156,22 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password
         ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
     }
 
     /**
