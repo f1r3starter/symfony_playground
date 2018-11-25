@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email has already been taken")
+ * @UniqueEntity(fields="username", message="Username has already been taken")
  */
 class User implements UserInterface, \Serializable
 {
@@ -19,8 +23,16 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert|NotBlank()
+     * @Assert|Length(min=5, max=50)
      */
     private $username;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min=8, max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="string")
@@ -29,11 +41,15 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=254, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=4, max=50)
      */
     private $fullName;
 
@@ -188,5 +204,21 @@ class User implements UserInterface, \Serializable
         list($this->id,
             $this->username,
             $this->password) = unserialize($serialized);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 }
