@@ -41,7 +41,7 @@ class SecurityController
     }
 
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/logout", name="security_logout")
      */
     public function logout()
     {
