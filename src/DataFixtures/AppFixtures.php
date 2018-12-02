@@ -10,6 +10,39 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private const USERS = [
+        [
+            'username' => 'john_doe',
+            'email' => 'john_doe@doe.com',
+            'password' => 'john123',
+            'fullName' => 'John Doe',
+        ],
+        [
+            'username' => 'rob_smith',
+            'email' => 'rob_smith@smith.com',
+            'password' => 'rob12345',
+            'fullName' => 'Rob Smith',
+        ],
+        [
+            'username' => 'marry_gold',
+            'email' => 'marry_gold@gold.com',
+            'password' => 'marry12345',
+            'fullName' => 'Marry Gold',
+        ],
+    ];
+
+    private const POST_TEXT = [
+        'Hello, how are you?',
+        'It\'s nice sunny weather today',
+        'I need to buy some ice cream!',
+        'I wanna buy a new car',
+        'There\'s a problem with my phone',
+        'I need to go to the doctor',
+        'What are you up to today?',
+        'Did you watch the game yesterday?',
+        'How was your day?'
+    ];
+
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -28,11 +61,13 @@ class AppFixtures extends Fixture
 
     private function loadMicroPost(ObjectManager $manager)
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $micropost = new MicroPost();
-            $micropost->setText('blah blah blah' . rand(1, 100));
-            $micropost->setTime(new \DateTime('2018-11-11'));
-            $micropost->setUser($this->getReference('john_doe'));
+            $micropost->setText(self::POST_TEXT[array_rand(self::POST_TEXT)]);
+            $date = new \DateTime();
+            $date->modify('-' . rand(0,30) . 'days');
+            $micropost->setTime($date);
+            $micropost->setUser($this->getReference(self::USERS[array_rand(self::USERS)]['username']));
             $manager->persist($micropost);
         }
 
@@ -41,16 +76,18 @@ class AppFixtures extends Fixture
 
     private function loadUsers(ObjectManager $manager)
     {
-        $user = new User();
-        $user->setUsername('john_doe');
-        $user->setFullName('John Doe');
-        $user->setEmail('john@doe.com');
-        $user->setPassword(
-            $this->passwordEncoder->encodePassword($user, 'john123')
-        );
-        $this->addReference('john_doe', $user);
+        foreach (self::USERS as $userData) {
+            $user = new User();
+            $user->setUsername($userData['username']);
+            $user->setFullName($userData['fullName']);
+            $user->setEmail($userData['email']);
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword($user, $userData['password'])
+            );
+            $this->addReference($userData['username'], $user);
 
-        $manager->persist($user);
-        $manager->flush();
+            $manager->persist($user);
+            $manager->flush();
+        }
     }
 }
