@@ -7,6 +7,15 @@
         </div>
     {% endfor %}
 
+    {% if usersToFollow|length > 0 %}
+        <p> You may find this profiles interesting:</p>
+
+        {% for userToFollow in usersToFollow %}
+            <a href="{{ path('following_follow', {id: userToFollow.id}) }}">
+                @ {{ userToFollow.username }}
+            </a>
+        {% endfor %}
+    {% else %}
     <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
     {% for post in posts %}
         {{ include('micro-post/raw-post.html.twig', { 'post': post}) }}
@@ -19,4 +28,5 @@
             {% endif %}
         </small>
     {% endfor %}
+    {% endif %}
 {% endblock %}

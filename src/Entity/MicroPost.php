@@ -37,6 +37,14 @@ class MicroPost
     private $user;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     * @ORM\JoinTable(name="post_likes",
+     *     joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
+     */
+    private $likedBy;
+
+    /**
      * @return mixed
      */
     public function getText()

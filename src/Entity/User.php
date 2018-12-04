@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -280,7 +281,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getFollowers()
     {
@@ -288,10 +289,24 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getFollowing()
     {
         return $this->following;
+    }
+
+    public function follow(User $user)
+    {
+        if (!$this->getFollowing()->contains($user)) {
+            $this->getFollowing()->add($user);
+        }
+    }
+
+    public function unfollow(User $user)
+    {
+        if ($this->getFollowing()->contains($user)) {
+            $this->getFollowing()->removeElement($user);
+        }
     }
 }
