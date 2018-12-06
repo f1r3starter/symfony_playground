@@ -94,6 +94,7 @@ class AppFixtures extends Fixture
             $user->setPassword(
                 $this->passwordEncoder->encodePassword($user, $userData['password'])
             );
+            $user->setEnabled(true);
             $user->setRoles($userData['roles']);
             $this->addReference($userData['username'], $user);
 
