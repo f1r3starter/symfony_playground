@@ -61,6 +61,9 @@ class NotificationController extends Controller
      */
     public function acknowledge(Notification $notification)
     {
+        if ($notification->getUser() !== $this->getUser()) {
+return;
+}
         $notification->setSeen(true);
         $this->getDoctrine()->getManager()->flush();
 
