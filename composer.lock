@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41bed63aa017eeea3585c68319f23cd3",
+    "content-hash": "c716e0b882c962d149d0e1dd2b63fc7b",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4298,7 +4298,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v4.1.8",
+            "version": "v4.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
