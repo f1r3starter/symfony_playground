@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Event\UserRegisterEvent;
 use App\Form\UserType;
+use App\Security\TokenGenerator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,9 +26,9 @@ class RegisterController extends Controller
     public function register(
         UserPasswordEncoderInterface $passwordEncoder,
         Request $request,
-        EventDispatcherInterface $eventDispatcher
-    )
-    {
+        EventDispatcherInterface $eventDispatcher,
+        TokenGenerator $tokenGenerator
+    ) {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -36,7 +37,7 @@ class RegisterController extends Controller
             $user->setPassword(
                 $passwordEncoder->encodePassword($user, $user->getPlainPassword())
             );
-            $user->setConfirmationToken(substr(bin2hex(random_bytes(15)), 0, 30));
+            $user->setConfirmationToken($tokenGenerator->getRandomSecureToken(30));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -46,13 +47,17 @@ class RegisterController extends Controller
 
             $eventDispatcher->dispatch(
                 UserRegisterEvent::NAME,
-                $userRegisterEvent);
+                $userRegisterEvent
+            );
 
             $this->redirect('micro_post_index');
         }
 
-        return $this->render('register/register.html.twig', [
-            'form' => $form->createView()
-        ]);
+        return $this->render(
+            'register/register.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }

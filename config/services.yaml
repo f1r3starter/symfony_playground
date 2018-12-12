@@ -49,9 +49,9 @@ services:
             - { lock_mode: 1 }
 
     App\Event\LocaleSubscriber:
-        - arguments:
-            '%kernel.default_locale%'
+        arguments:
+              ['%kernel.default_locale%']
 
     App\Event\UserSubscriber:
-        - arguments:
+        arguments:
               $defaultLocale: '%kernel.default_locale%'
