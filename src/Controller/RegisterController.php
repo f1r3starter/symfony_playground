@@ -50,7 +50,7 @@ class RegisterController extends Controller
                 $userRegisterEvent
             );
 
-            $this->redirect('micro_post_index');
+            return $this->redirectToRoute('micro_post_index');
         }
 
         return $this->render(
