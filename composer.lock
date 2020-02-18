@@ -941,12 +941,12 @@
             "version": "v2.6.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "434820973cadf2da2d66e7184be370084cc32ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/434820973cadf2da2d66e7184be370084cc32ca8",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/434820973cadf2da2d66e7184be370084cc32ca8",
                 "reference": "434820973cadf2da2d66e7184be370084cc32ca8",
                 "shasum": ""
             },
@@ -4960,6 +4960,7 @@
                 "code",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2018-08-13T20:36:59+00:00"
         },
         {
@@ -5014,6 +5015,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],
@@ -5248,6 +5250,7 @@
                 "selenium",
                 "webdriver"
             ],
+            "abandoned": "php-webdriver/webdriver",
             "time": "2018-05-16T17:37:13+00:00"
         },
         {
@@ -5640,16 +5643,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.1.9",
+            "version": "v4.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "473fb4544afff836f4d9877c4607efe46b94cea9"
+                "reference": "cc546f59d55f63010ff4d4f40a2af39526842524"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/473fb4544afff836f4d9877c4607efe46b94cea9",
-                "reference": "473fb4544afff836f4d9877c4607efe46b94cea9",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/cc546f59d55f63010ff4d4f40a2af39526842524",
+                "reference": "cc546f59d55f63010ff4d4f40a2af39526842524",
                 "shasum": ""
             },
             "require": {
@@ -5702,7 +5705,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2018-11-24T07:45:31+00:00"
+            "time": "2019-04-16T09:37:00+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
